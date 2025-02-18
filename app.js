@@ -18,6 +18,7 @@ fs.access(filePath, fs.constants.F_OK, (err) => {
     const existiaAntes = !err; //Si no hay error es xq el archivo ya existia
 
     //Crea o abre (si ya exisita) un archivo en modo a+ (lectura / escritura)
+    // ** Al utilizar 'a+' lo añadirá al final del archivo (append)
     fs.open('archivo.txt', 'a+', (err, fd) => {
         if( err ) {
             console.error('No se puede crear o abrir el fichero.', err);
@@ -72,4 +73,27 @@ fs.readFile('texto1.txt', 'utf8', (err, data) => {
     } else {
         console.log('Contenido del archivo: ', data);
     }
+});
+
+//Para añadir texto al final del archivo
+fs.open('archivo.txt', 'a+', (err, fd) => {
+    if (err) throw err;
+
+    fs.write(fd, ' Nuevo contenido añadido.', (err) => {
+        if (err) throw err;
+
+        console.log('Contenido añadido correctamente.');
+
+        //Leer contenido del archivo despues d escribir
+        fs.readFile('archivo.txt', 'utf8', (err, data) => {
+            if (err) throw err;
+            console.log('Contenido actual del archivo:', data);
+        });
+    
+        //Cerramos archivo
+        fs.close(fd, (err) => {
+            if (err) throw err;
+            console.log('Archivo cerrado.');
+        });
+    });
 });
