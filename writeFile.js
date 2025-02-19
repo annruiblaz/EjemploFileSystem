@@ -3,6 +3,11 @@ const { text } = require('stream/consumers');
 
 const filePath = 'archivo.txt';
 
+const texto = `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Nulla porta dolor enim, id eleifend odio maximus non. Maecenas eu commodo lectus. Nulla tincidunt leo eget nulla vehicula, sit amet vehicula dui gravida.
+    Aenean faucibus dolor eu efficitur accumsan. Suspendisse ut felis urna. Donec non velit pharetra, vehicula enim nec, fringilla neque.`;
+
+
 //Crea o abre (si ya exisita) un archivo en modo a+ (lectura / escritura)
 /* fs.open('archivo.txt', 'a+', (err, fd) => {
     if( err ) {
@@ -31,7 +36,6 @@ fs.access(filePath, fs.constants.F_OK, (err) => {
 
 //Escribe el txt en el archivo (es asincrono)
 // **sobrescribiendolo si ya existe el archivo
-const texto = 'La materia s transforma ...';
 fs.writeFile('texto1.txt', texto, (err) => {
     if(err) {
         console.log('Error al escribir en el archivo:', err);
@@ -97,3 +101,5 @@ fs.open('archivo.txt', 'a+', (err, fd) => {
         });
     });
 });
+
+
